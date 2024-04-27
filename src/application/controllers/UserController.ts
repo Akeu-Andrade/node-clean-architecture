@@ -1,5 +1,4 @@
-import { IUser } from "../../domain/entities/IUser";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ISaveUserUseCase } from "../../domain/usecases/user/ISaveUserUseCase";
 import { inject, injectable } from "tsyringe";
 
@@ -7,18 +6,18 @@ import { inject, injectable } from "tsyringe";
 export class UserController {
     private saveUserUseCase: ISaveUserUseCase;
 
-    constructor(@inject("ISaveUserUseCase") saveUserUseCase: ISaveUserUseCase) {
+    constructor(
+        @inject("ISaveUserUseCase") saveUserUseCase: ISaveUserUseCase
+    ) {
         this.saveUserUseCase = saveUserUseCase;
     }
 
-    createUser = async (req: Request, res: Response): Promise<void> => {
+    createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const user: IUser = req.body;
-            const newUser = await this.saveUserUseCase.invoke(user);
+            const newUser = await this.saveUserUseCase.invoke(req.body);
             res.status(201).json(newUser);
         } catch (error) {
-            const message = (error as Error).message;
-            res.status(500).json({ message });
+            next(error);
         }
     };
 }

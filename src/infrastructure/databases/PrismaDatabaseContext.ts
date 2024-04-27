@@ -14,4 +14,9 @@ export class PrismaDatabaseContext<T> implements IDatabaseContext<T> {
         return result as any;
     }
 
+    async findOne(query: any): Promise<T | null> {
+        const result = await this.prisma.user.findFirst({ where: query as any });
+        return result as any;
+    }
+
 }

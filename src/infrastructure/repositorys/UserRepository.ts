@@ -13,7 +13,22 @@ export class UserRepository implements IUserRepository {
     }
 
     async createUser(user: IUser): Promise<IUser> {
-        const newUser = await this.dbContext.create(user);
-        return newUser;
+        try {
+            const newUser = await this.dbContext.create(user);
+            return newUser;
+        } catch (error) {
+            console.error('Error ao criar usuario:', error);
+            throw error;
+        }
+    }
+
+    async findByEmail(email: string): Promise<IUser | null> {
+        try {
+            const user = await this.dbContext.findOne({ email });
+            return user;
+        } catch (error) {
+            console.error('Error ao buscar usuario:', error);
+            throw error;
+        }
     }
 }
