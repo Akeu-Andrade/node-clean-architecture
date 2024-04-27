@@ -1,4 +1,4 @@
-class Buy {
+export class Buy {
     constructor(
       private id: string,
       private user: string,

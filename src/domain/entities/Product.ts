@@ -1,4 +1,4 @@
-class Product {
+export class Product {
     constructor(
       private id: string,
       private name: string,

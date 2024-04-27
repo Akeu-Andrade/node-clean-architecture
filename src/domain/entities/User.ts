@@ -1,5 +1,5 @@
 //Todo ver se transformo em uma interface dps
-class User {
+export class User {
     constructor(
       private id: string,
       private name: string,
