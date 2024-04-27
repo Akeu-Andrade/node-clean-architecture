@@ -1,5 +1,5 @@
-import { Cart } from "../../entities/Cart";
+import { ICart } from "../../entities/ICart";
 
 export interface IGetCartUseCase {
-    execute(id: string): Promise<Cart>;
+    execute(id: string): Promise<ICart>;
 }
