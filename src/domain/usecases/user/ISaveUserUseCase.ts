@@ -1,5 +1,5 @@
-import { User } from "../../entities/User";
+import { IUser } from "../../entities/IUser";
 
-export interface ISaveCreateUserUseCase {
-    invoke(user: User): Promise<User>;
+export interface ISaveUserUseCase {
+    invoke(user: IUser): Promise<IUser>;
 }
