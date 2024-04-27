@@ -1,5 +1,5 @@
-import { Product } from "../../entities/Product";
+import { Product } from "../../entities/IProduct";
 
 export interface ISaveProductUseCase {
-    execute(product: Product): Promise<Product>;
+    invoke(product: Product): Promise<Product>;
 }

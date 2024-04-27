@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
-import { IUser } from '../../domain/entities/IUser';
-import { IUserRepository } from '../../domain/repositorys/IUserRepository';
-import { IGetUsersUseCase } from '../../domain/usecases/user/IGetUsersUseCase';
+import { IUser } from '../../../domain/entities/IUser';
+import { IUserRepository } from '../../../domain/repositorys/IUserRepository';
+import { IGetUsersUseCase } from '../../../domain/usecases/user/IGetUsersUseCase';
 
 @injectable()
 export class GetUsersUseCase implements IGetUsersUseCase {

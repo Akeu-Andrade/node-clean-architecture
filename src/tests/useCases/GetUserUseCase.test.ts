@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { GetUsersUseCase } from "../../application/useCases/GetUsersUseCase";
+import { GetUsersUseCase } from "../../application/useCases/user/GetUsersUseCase";
 
 describe('GetUsersUseCase', () => {
     it('deve retornar uma lista de usuários', async () => {

@@ -1,14 +1,14 @@
 import { inject, injectable } from "tsyringe";
-import { IDatabaseContext } from "../../domain/data/IDatabaseContext";
+import { IUserDatabaseContext } from "../../domain/data/IUserDatabaseContext";
 import { IUser } from "../../domain/entities/IUser";
 import { IUserRepository } from "../../domain/repositorys/IUserRepository";
 
 @injectable()
 export class UserRepository implements IUserRepository {
 
-    private dbContext: IDatabaseContext<IUser>;
+    private dbContext: IUserDatabaseContext<IUser>;
 
-    constructor(@inject("IDatabaseContext") dbContext: IDatabaseContext<IUser>) {
+    constructor(@inject("IUserDatabaseContext") dbContext: IUserDatabaseContext<IUser>) {
         this.dbContext = dbContext;
     }
 
