@@ -9,8 +9,6 @@ export class GetProductsUseCase {
 
     async invoke(name?: string) {
         try {
-            console.log(name);
-            
             if (name) {
                 return await this.productRepository.findByName(name);
             } else {

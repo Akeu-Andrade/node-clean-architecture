@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { IProductDatabaseContext } from "../../domain/data/IProductDatabaseContext";
 import { IProduct } from "../../domain/entities/IProduct";
 import { IProductRepository } from "../../domain/repositorys/IProductRepository";
+import { query } from "express";
 
 @injectable()
 export class ProductRepository implements IProductRepository {
@@ -14,7 +15,11 @@ export class ProductRepository implements IProductRepository {
 
     async findByName(name: string): Promise<IProduct[]> {
         try {
-            const product = await this.dbContext.findAllByQuery({ name });
+            const product = await this.dbContext.findAllByQuery(
+                { 
+                    name: { contains: name } 
+                }
+            );
             return product;
         } catch (error) {
             console.error('Error ao buscar produto:', error);
