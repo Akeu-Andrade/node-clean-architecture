@@ -31,4 +31,14 @@ export class UserRepository implements IUserRepository {
             throw error;
         }
     }
+
+    async getUsers(): Promise<IUser[]> {
+        try {
+            const users = await this.dbContext.findAll();
+            return users;
+        } catch (error) {
+            console.error('Error ao todos usuarios:', error);
+            throw error;
+        }
+    }
 }

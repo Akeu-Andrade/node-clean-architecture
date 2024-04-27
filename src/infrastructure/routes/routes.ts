@@ -13,6 +13,8 @@ const userController = container.resolve<UserController>("UserController");
 
 router.post('/user', userController.createUser);
 
+router.get('/users', userController.getUsers);
+
 router.use(errorHandler);
 
 export default router;

@@ -19,4 +19,9 @@ export class PrismaDatabaseContext<T> implements IDatabaseContext<T> {
         return result as any;
     }
 
+    async findAll(): Promise<T[]> {
+        const result = await this.prisma.user.findMany();
+        return result as any;
+    }
+
 }
