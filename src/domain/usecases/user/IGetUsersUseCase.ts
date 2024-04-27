@@ -1,5 +1,5 @@
-import { User } from "../../entities/User";
+import { IUser } from "../../entities/IUser";
 
-export interface IGetUserUseCase {
-    invoke(): Promise<User>;
+export interface IGetUsersUseCase {
+    invoke(): Promise<IUser[]>;
 }
