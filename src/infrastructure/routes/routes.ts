@@ -28,6 +28,7 @@ router.post('/cart/:cartId', cartController.addProductToCart);
 router.get('/cart', cartController.getCart);
 
 router.post('/cart/:cartId/order', orderController.createOrder);
+router.get('/orders/stats', orderController.getStats);
 
 router.use(errorHandler);
 

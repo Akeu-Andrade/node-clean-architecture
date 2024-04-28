@@ -22,4 +22,34 @@ export class OrderDatabaseContext implements IOrderDatabaseContext {
     
         return await this.prisma.order.create({ data: orderData });
     }
+
+    async count(): Promise<number> {
+        return await this.prisma.order.count();
+    }
+
+    async sum(field: string): Promise<number> {
+        const total = await this.prisma.order.aggregate({
+            _sum: {
+                [field]: true
+            }
+        });
+
+        return total._sum[field];
+    }
+
+    async getTopProductId(): Promise<string> {
+        const groupedItems = await this.prisma.orderItem.groupBy({
+            by: ['productId'],
+            _count: {
+                productId: true
+            }
+        });
+    
+        if (!groupedItems || groupedItems.length === 0) {
+            return '';
+        }
+    
+        const sortedProducts = groupedItems.sort((a, b) => b._count.productId - a._count.productId);
+        return sortedProducts[0].productId;
+    }
 }
