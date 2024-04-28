@@ -20,6 +20,16 @@ export class CartController {
         this.getCartUseCase = getCartUseCase;
     }
 
+    getCart = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+        try {
+            const { cartId } = request.body;
+            const cart = await this.getCartUseCase.invoke(cartId);
+            response.status(200).json(cart);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     createCart = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
         try {
             const { userId } = request.body;
@@ -40,15 +50,4 @@ export class CartController {
             next(error);
         }
     }
-
-    getCart = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
-        try {
-            const { cartId } = request.body;
-            const cart = await this.getCartUseCase.invoke(cartId);
-            response.status(200).json(cart);
-        } catch (error) {
-            next(error);
-        }
-    }
-
 }

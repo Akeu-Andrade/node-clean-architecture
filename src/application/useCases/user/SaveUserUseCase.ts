@@ -6,9 +6,13 @@ import { EmailAlreadyExistsError } from '../../../domain/errors/EmailAlreadyExis
 
 @injectable()
 export class SaveUserUseCase implements ISaveUserUseCase {
+    private userRepository: IUserRepository;
+    
     constructor(
-        @inject("IUserRepository") private userRepository: IUserRepository
-    ) {}
+        @inject("IUserRepository") userRepository: IUserRepository
+    ) {
+        this.userRepository = userRepository;
+    }
 
     async invoke(user: IUser): Promise<IUser> {
         try {

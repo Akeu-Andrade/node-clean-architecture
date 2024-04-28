@@ -5,9 +5,13 @@ import { IProduct } from "../../../domain/entities/IProduct";
 
 @injectable()
 export class SaveProductUseCase implements ISaveProductUseCase {
+    private productRepository: IProductRepository;
+
     constructor(
-        @inject("IProductRepository") private productRepository: IProductRepository
-    ) {}
+        @inject("IProductRepository") productRepository: IProductRepository
+    ) {
+        this.productRepository = productRepository;
+    }
 
     async invoke(product: IProduct): Promise<IProduct> {
         try {

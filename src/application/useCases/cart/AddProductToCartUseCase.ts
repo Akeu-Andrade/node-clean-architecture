@@ -5,7 +5,6 @@ import { IAddProductToCartUseCase } from "../../../domain/usecases/cart/IAddProd
 import { ICart } from "../../../domain/entities/ICart";
 import { InvalidParametersError } from "../../../domain/errors/InvalidParametersError";
 import { ObjectNotFoundError as ItemNotFoundError } from "../../../domain/errors/ObjectNotFoundError";
-import { IProduct } from "../../../domain/entities/IProduct";
 
 @injectable()
 export class AddProductToCartUseCase implements IAddProductToCartUseCase {
