@@ -60,4 +60,8 @@ export class CartDatabaseContext implements ICartDatabaseContext {
         return cart;
 
     }
+
+    async clearCart(cartId: string): Promise<void> {
+        await this.prisma.cartItem.deleteMany({ where: { cartId } });
+    }
 }

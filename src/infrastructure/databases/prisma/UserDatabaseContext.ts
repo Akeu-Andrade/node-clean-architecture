@@ -10,18 +10,18 @@ export class UserDatabaseContext implements IUserDatabaseContext {
     }
 
     async create(document: User): Promise<User> {
-        return this.prisma.user.create({ data: document });
+        return await this.prisma.user.create({ data: document });
     }
 
     async findOne(query: any): Promise<User | null> {
-        return this.prisma.user.findFirst({ where: query });
+        return await this.prisma.user.findFirst({ where: query });
     }
 
     async findAll(): Promise<User[]> {
-        return this.findAllByQuery({});
+        return await this.findAllByQuery({});
     }
     
     async findAllByQuery(query: any): Promise<User[]> {
-        return this.prisma.user.findMany({ where: query });
+        return await this.prisma.user.findMany({ where: query });
     }
 }

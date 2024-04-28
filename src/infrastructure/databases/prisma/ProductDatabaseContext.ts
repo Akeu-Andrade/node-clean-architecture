@@ -9,19 +9,19 @@ export class ProductDatabaseContext implements IProductDatabaseContext {
     }
 
     async create(document: Product): Promise<Product> {
-        return this.prisma.product.create({ data: document });
+        return await this.prisma.product.create({ data: document });
     }
 
     async findAllByQuery(query: any): Promise<Product[]> {
-        return this.prisma.product.findMany({ where: query });
+        return await this.prisma.product.findMany({ where: query });
     }
 
     async findAll(): Promise<Product[]> {
-        return this.prisma.product.findMany({});
+        return await this.prisma.product.findMany({});
     }
 
     async findById(id: string): Promise<Product | null> {
-        return this.prisma.product.findUnique({ where: { id } });
+        return await this.prisma.product.findUnique({ where: { id } });
     }
     
 }

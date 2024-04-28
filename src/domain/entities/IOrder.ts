@@ -1,7 +1,7 @@
 export interface IOrder {
-  id : string;
-  user : string;
-  products : Array<{ product: string; quantity: number }>;
+  id? : string;
+  userId : string;
+  orderItems? : Array<{ productId: string; quantity: number }>;
   totalPrice : number;
   date : Date;
 }

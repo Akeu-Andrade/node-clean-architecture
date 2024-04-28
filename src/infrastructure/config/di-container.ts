@@ -16,14 +16,20 @@ import { CartDatabaseContext } from "../databases/prisma/CartDatabaseContext";
 import { CartRepository } from "../repositorys/CartRepository";
 import { AddProductToCartUseCase } from "../../application/useCases/cart/AddProductToCartUseCase";
 import { GetCartUseCase } from "../../application/useCases/cart/GetCartUseCase";
+import { OrderDatabaseContext } from "../databases/prisma/OrderDatabaseContext";
+import { CompleteOrderUseCase } from "../../application/useCases/order/CompleteOrderUseCase";
+import { OrderRepository } from "../repositorys/OrderRepository";
+import { OrderController } from "../../application/controllers/OrderController";
 
 container.registerSingleton('IUserDatabaseContext', UserDatabaseContext);
 container.registerSingleton('IProductDatabaseContext', ProductDatabaseContext);
 container.registerSingleton('ICartDatabaseContext', CartDatabaseContext);
+container.registerSingleton('IOrderDatabaseContext', OrderDatabaseContext);
 
 container.registerSingleton('IUserRepository', UserRepository);
 container.registerSingleton('IProductRepository', ProductRepository);
 container.registerSingleton('ICartRepository', CartRepository);
+container.registerSingleton('IOrderRepository', OrderRepository);
 
 container.registerSingleton('ISaveUserUseCase', SaveUserUseCase)
     .registerSingleton('IGetUsersUseCase', GetUsersUseCase);
@@ -32,7 +38,9 @@ container.registerSingleton('ISaveProductUseCase', SaveProductUseCase)
 container.registerSingleton('ICreateCartUseCase', CreateCartUseCase)
     .registerSingleton('IAddProductToCartUseCase', AddProductToCartUseCase)
     .registerSingleton('IGetCartUseCase', GetCartUseCase);
+container.registerSingleton('ICompleteOrderUseCase', CompleteOrderUseCase);
 
 container.registerSingleton('UserController', UserController);
 container.registerSingleton('ProductController', ProductController);
 container.registerSingleton('CartController', CartController);
+container.registerSingleton('OrderController', OrderController);

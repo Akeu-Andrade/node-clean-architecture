@@ -7,4 +7,5 @@ export interface ICartDatabaseContext {
     delete(id: string): Promise<void>;
     findOne(filter: any): Promise<ICart | null>;
     addProductToCart(cartId: string, productId: string, quantity: number): Promise<ICart>;
+    clearCart(cartId: string): Promise<void>;
 }

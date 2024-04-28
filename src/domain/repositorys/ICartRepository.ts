@@ -6,4 +6,5 @@ export interface ICartRepository {
     getCartById(cartId: string): Promise<ICart | null>;
     deleteCart(cartId: string): Promise<void>;
     getCartByUserId(userId: string): Promise<ICart | null>;
+    clearCart(cartId: string): Promise<void>;
 }

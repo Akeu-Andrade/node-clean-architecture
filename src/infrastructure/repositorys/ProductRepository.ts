@@ -2,7 +2,6 @@ import { inject, injectable } from "tsyringe";
 import { IProductDatabaseContext } from "../../domain/data/IProductDatabaseContext";
 import { IProduct } from "../../domain/entities/IProduct";
 import { IProductRepository } from "../../domain/repositorys/IProductRepository";
-import { query } from "express";
 
 @injectable()
 export class ProductRepository implements IProductRepository {

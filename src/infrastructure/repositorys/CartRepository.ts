@@ -53,7 +53,7 @@ export class CartRepository implements ICartRepository {
     }
 
     async deleteCart(cartId: string): Promise<void> {
-       
+        throw new Error("Method not implemented.");
     }
 
     async getCartByUserId(userId: string): Promise<ICart | null> {
@@ -63,6 +63,15 @@ export class CartRepository implements ICartRepository {
         } catch (error) {
             console.error('Error ao buscar carrinho:', error);
             throw new Error('Não foi possível buscar o carrinho');
+        }
+    }
+
+    async clearCart(cartId: string): Promise<void> {
+        try {
+            await this.dbContext.clearCart(cartId);
+        } catch (error) {
+            console.error('Error ao limpar carrinho:', error);
+            throw new Error('Não foi possível limpar o carrinho');
         }
     }
 }
