@@ -24,18 +24,23 @@ export class CartRepository implements ICartRepository {
         }
     }
 
-    // async addProductToCart(
-    //     cartId: string, 
-    //     productId: string, 
-    //     quantity: number
-    // ): Promise<ICart> {
-    //     try {
-            
-    //     } catch (error) {
-    //         console.error('Error ao adicionar produto ao carrinho:', error);
-    //         throw new Error('Não foi possível adicionar o produto ao carrinho');
-    //     }
-    // }
+    async addProductToCart(
+        cartId: string, 
+        productId: string, 
+        quantity: number
+    ): Promise<ICart> {
+        try {
+            const cart = await this.dbContext.findById(cartId);
+            if (!cart) {
+                throw new Error('Carrinho não encontrado');
+            }
+            const product = await this.dbContext.addProductToCart(cartId, productId, quantity);
+            return product;
+        } catch (error) {
+            console.error('Error ao adicionar produto ao carrinho:', error);
+            throw new Error('Não foi possível adicionar o produto ao carrinho');
+        }
+    }
 
     async getCartById(cartId: string): Promise<ICart | null> {
         try {

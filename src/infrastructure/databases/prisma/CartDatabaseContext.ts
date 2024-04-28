@@ -1,5 +1,6 @@
 import { Cart, PrismaClient } from "@prisma/client";
 import { ICartDatabaseContext } from "../../../domain/data/ICartDatabaseContext";
+import { ObjectNotFoundError } from "../../../domain/errors/ObjectNotFoundError";
 
 export class CartDatabaseContext implements ICartDatabaseContext {
     private prisma: PrismaClient;
@@ -26,5 +27,32 @@ export class CartDatabaseContext implements ICartDatabaseContext {
 
     async findOne(filter: any): Promise<Cart | null> {
         return await this.prisma.cart.findFirst({ where: filter });
+    }
+
+    async addProductToCart(cartId: string, productId: string, quantity: number): Promise<Cart> {
+        const cartItem = await this.prisma.cartItem.create({
+            data: {
+                quantity,
+                cart: {
+                    connect: {
+                        id: cartId
+                    }
+                },
+                product: {
+                    connect: {
+                        id: productId
+                    }
+                }
+            }
+        });
+
+        const cart = await this.prisma.cart.findUnique({ where: { id: cartId }, include: { cartItems: true } });
+    
+        if (!cart) {
+            throw new ObjectNotFoundError("Carrinho não encontrado");
+        }
+
+        return cart;
+
     }
 }

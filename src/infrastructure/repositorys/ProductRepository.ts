@@ -46,4 +46,14 @@ export class ProductRepository implements IProductRepository {
             throw error;
         }
     }
+
+    async getProductById(productId: string): Promise<IProduct | null> {
+        try {
+            const product = await this.dbContext.findById( productId );
+            return product;
+        } catch (error) {
+            console.error('Error ao buscar produto por id:', error);
+            throw error;
+        }
+    }
 }

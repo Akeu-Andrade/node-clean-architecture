@@ -12,7 +12,8 @@ describe('GetUsersUseCase', () => {
         const mockUserRepository = {
             createUser: jest.fn().mockResolvedValue(user1),
             findByEmail: jest.fn().mockResolvedValue(null),
-            getUsers: jest.fn().mockResolvedValue(mockUsers)
+            getUsers: jest.fn().mockResolvedValue(mockUsers),
+            findByUserId: jest.fn().mockResolvedValue(null)
         };
 
         const getUsersUseCase = new GetUsersUseCase(mockUserRepository);
