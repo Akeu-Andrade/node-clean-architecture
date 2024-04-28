@@ -14,7 +14,12 @@ export class CartDatabaseContext implements ICartDatabaseContext {
     }
 
     async findById(id: string): Promise<Cart | null> {
-        return await this.prisma.cart.findUnique({ where: { id } });
+        return await this.prisma.cart.findUnique(
+            { 
+                where: { id },
+                include: { cartItems: true }
+            }
+        );
     }
 
     async update(id: string, updatedCart: Cart): Promise<Cart> {

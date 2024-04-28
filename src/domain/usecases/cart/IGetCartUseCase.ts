@@ -1,5 +1,5 @@
 import { ICart } from "../../entities/ICart";
 
 export interface IGetCartUseCase {
-    execute(id: string): Promise<ICart>;
+    invoke(id?: string | undefined): Promise<ICart>;
 }

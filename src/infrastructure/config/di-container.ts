@@ -15,6 +15,7 @@ import { CartController } from "../../application/controllers/CartController";
 import { CartDatabaseContext } from "../databases/prisma/CartDatabaseContext";
 import { CartRepository } from "../repositorys/CartRepository";
 import { AddProductToCartUseCase } from "../../application/useCases/cart/AddProductToCartUseCase";
+import { GetCartUseCase } from "../../application/useCases/cart/GetCartUseCase";
 
 container.registerSingleton('IUserDatabaseContext', UserDatabaseContext);
 container.registerSingleton('IProductDatabaseContext', ProductDatabaseContext);
@@ -29,7 +30,8 @@ container.registerSingleton('ISaveUserUseCase', SaveUserUseCase)
 container.registerSingleton('ISaveProductUseCase', SaveProductUseCase)
     .registerSingleton('IGetProductsUseCase', GetProductsUseCase);
 container.registerSingleton('ICreateCartUseCase', CreateCartUseCase)
-    .registerSingleton('IAddProductToCartUseCase', AddProductToCartUseCase);
+    .registerSingleton('IAddProductToCartUseCase', AddProductToCartUseCase)
+    .registerSingleton('IGetCartUseCase', GetCartUseCase);
 
 container.registerSingleton('UserController', UserController);
 container.registerSingleton('ProductController', ProductController);

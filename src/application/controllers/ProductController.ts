@@ -28,7 +28,7 @@ export class ProductController {
     getProducts = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
         try {
             const { name } = request.body;
-            const products = await this.getProductsUseCase.invoke(name ? name : null);
+            const products = await this.getProductsUseCase.invoke(name);
             response.status(200).json(products);
         } catch (error) {
             next(error);

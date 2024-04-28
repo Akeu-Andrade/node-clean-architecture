@@ -1,11 +1,16 @@
 import { inject, injectable } from "tsyringe";
 import { IProductRepository } from "../../../domain/repositorys/IProductRepository";
+import { IGetProductsUseCase } from "../../../domain/usecases/product/IGetProductsUseCase";
 
 @injectable()
-export class GetProductsUseCase {
+export class GetProductsUseCase implements IGetProductsUseCase {
+    private productRepository: IProductRepository;
+
     constructor(
-        @inject("IProductRepository") private productRepository: IProductRepository
-    ) {}
+        @inject("IProductRepository") productRepository: IProductRepository
+    ) {
+        this.productRepository = productRepository;
+    }
 
     async invoke(name?: string) {
         try {

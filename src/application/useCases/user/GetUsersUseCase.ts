@@ -5,9 +5,13 @@ import { IGetUsersUseCase } from '../../../domain/usecases/user/IGetUsersUseCase
 
 @injectable()
 export class GetUsersUseCase implements IGetUsersUseCase {
+    private userRepository: IUserRepository;
+
     constructor(
-        @inject("IUserRepository") private userRepository: IUserRepository
-    ) {}
+        @inject("IUserRepository") userRepository: IUserRepository
+    ) {
+        this.userRepository = userRepository;
+    }
 
     async invoke(): Promise<IUser[]> {
         try {
