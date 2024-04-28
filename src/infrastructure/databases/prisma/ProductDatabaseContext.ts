@@ -1,7 +1,7 @@
 import { PrismaClient, Product } from "@prisma/client";
 import { IProductDatabaseContext } from "../../../domain/data/IProductDatabaseContext";
 
-export class ProductDatabaseContext implements IProductDatabaseContext<Product> {
+export class ProductDatabaseContext implements IProductDatabaseContext {
     private prisma: PrismaClient;
 
     constructor() {

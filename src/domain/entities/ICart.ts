@@ -1,5 +1,5 @@
 export interface ICart {
-    id: string;
-    user: string;
-    products: Array<{ product: string; quantity: number }>;
+    id?: string;
+    userId: string;
+    cartItems?: Array<{ product: string; quantity: number }>;
 }

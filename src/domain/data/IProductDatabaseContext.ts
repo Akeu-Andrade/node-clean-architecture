@@ -1,5 +1,7 @@
-export interface IProductDatabaseContext<T> {
-    create(document: T): Promise<T>;
-    findAllByQuery(query: any): Promise<T[]>;
-    findAll(): Promise<T[]>;
+import { IProduct } from "../entities/IProduct";
+
+export interface IProductDatabaseContext {
+    create(document: IProduct): Promise<IProduct>;
+    findAllByQuery(query: any): Promise<IProduct[]>;
+    findAll(): Promise<IProduct[]>;
 }

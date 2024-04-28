@@ -1,7 +1,8 @@
 import { PrismaClient, User } from "@prisma/client";
 import { IUserDatabaseContext } from "../../../domain/data/IUserDatabaseContext";
+import { IUser } from "../../../domain/entities/IUser";
 
-export class UserDatabaseContext implements IUserDatabaseContext<User> {
+export class UserDatabaseContext implements IUserDatabaseContext {
     private prisma: PrismaClient;
 
     constructor() {

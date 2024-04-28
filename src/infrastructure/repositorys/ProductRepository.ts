@@ -7,9 +7,9 @@ import { query } from "express";
 @injectable()
 export class ProductRepository implements IProductRepository {
 
-    private dbContext: IProductDatabaseContext<IProduct>;
+    private dbContext: IProductDatabaseContext;
 
-    constructor(@inject("IProductDatabaseContext") dbContext: IProductDatabaseContext<IProduct>) {
+    constructor(@inject("IProductDatabaseContext") dbContext: IProductDatabaseContext) {
         this.dbContext = dbContext;
     }
 

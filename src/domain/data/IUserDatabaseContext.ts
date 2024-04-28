@@ -1,5 +1,7 @@
-export interface IUserDatabaseContext<T> {
-    create(document: T): Promise<T>;
-    findOne(query: any): Promise<T | null>;
-    findAll(): Promise<T[]>;
+import { IUser } from "../entities/IUser";
+
+export interface IUserDatabaseContext {
+    create(document: IUser): Promise<IUser>;
+    findOne(query: any): Promise<IUser | null>;
+    findAll(): Promise<IUser[]>;
 }

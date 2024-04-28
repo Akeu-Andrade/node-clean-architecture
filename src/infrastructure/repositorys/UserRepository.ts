@@ -6,9 +6,9 @@ import { IUserRepository } from "../../domain/repositorys/IUserRepository";
 @injectable()
 export class UserRepository implements IUserRepository {
 
-    private dbContext: IUserDatabaseContext<IUser>;
+    private dbContext: IUserDatabaseContext;
 
-    constructor(@inject("IUserDatabaseContext") dbContext: IUserDatabaseContext<IUser>) {
+    constructor(@inject("IUserDatabaseContext") dbContext: IUserDatabaseContext) {
         this.dbContext = dbContext;
     }
 
@@ -38,6 +38,16 @@ export class UserRepository implements IUserRepository {
             return users;
         } catch (error) {
             console.error('Error ao todos usuarios:', error);
+            throw error;
+        }
+    }
+
+    async findByUserId(id: string): Promise<IUser | null> {
+        try {
+            const user = await this.dbContext.findOne({ id });
+            return user;
+        } catch (error) {
+            console.error('Error ao buscar usuario:', error);
             throw error;
         }
     }
