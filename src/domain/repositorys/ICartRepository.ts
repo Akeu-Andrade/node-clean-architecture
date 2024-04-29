@@ -1,4 +1,5 @@
 import { ICart } from "../entities/ICart";
+import { IProduct } from "../entities/IProduct";
 
 export interface ICartRepository {
     createCart(card: ICart): Promise<ICart>;
@@ -7,4 +8,5 @@ export interface ICartRepository {
     deleteCart(cartId: string): Promise<void>;
     getCartByUserId(userId: string): Promise<ICart | null>;
     clearCart(cartId: string): Promise<void>;
+    updateProductInCart(cart: ICart, product: IProduct, quantity: number): Promise<ICart>;
 }

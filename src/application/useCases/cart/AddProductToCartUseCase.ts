@@ -5,6 +5,7 @@ import { IAddProductToCartUseCase } from "../../../domain/usecases/cart/IAddProd
 import { ICart } from "../../../domain/entities/ICart";
 import { InvalidParametersError } from "../../../domain/errors/InvalidParametersError";
 import { ObjectNotFoundError as ItemNotFoundError } from "../../../domain/errors/ObjectNotFoundError";
+import { IProduct } from "../../../domain/entities/IProduct";
 
 @injectable()
 export class AddProductToCartUseCase implements IAddProductToCartUseCase {
@@ -24,9 +25,18 @@ export class AddProductToCartUseCase implements IAddProductToCartUseCase {
 
             this.validateParameters(cartId, productId, quantity);
 
-            await this.getCart(cartId);
-            await this.getProduct(productId);
-            //Todo adicionar regar de somar quantidade caso exista o produto no carrinho
+            const cart = await this.getCart(cartId);
+            const product = await this.getProduct(productId);
+        
+            const exisitProduct = cart!.cartItems?.find(product => product.productId === productId);
+
+            if (exisitProduct) {
+                return await this.cartRepository.updateProductInCart(
+                    cart,
+                    product,
+                    exisitProduct.quantity + quantity
+                )
+            }
 
             return await this.cartRepository.addProductToCart(
                 cartId,
@@ -45,18 +55,22 @@ export class AddProductToCartUseCase implements IAddProductToCartUseCase {
         }
     }
 
-    private async getCart(cartId: string) {
+    private async getCart(cartId: string): Promise<ICart> {
         const cart = await this.cartRepository.getCartById(cartId);
         if (!cart) {
             throw new ItemNotFoundError();
         }
+
+        return cart;
     }
 
-    private async getProduct(productId: string) {
+    private async getProduct(productId: string): Promise<IProduct> {
         const product = await this.productRepository.getProductById(productId);
         if (!product) {
             throw new ItemNotFoundError();
         }
+
+        return product;
     }
 
 }

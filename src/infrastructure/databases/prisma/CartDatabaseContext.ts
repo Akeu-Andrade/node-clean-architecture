@@ -30,6 +30,10 @@ export class CartDatabaseContext implements ICartDatabaseContext {
         await this.prisma.cart.delete({ where: { id } });
     }
 
+    async updateItem(cartItemId: string, updatedItem: any): Promise<void> {
+        await this.prisma.cartItem.update({ where: { id: cartItemId }, data: updatedItem });
+    }
+
     async findOne(filter: any): Promise<Cart | null> {
         return await this.prisma.cart.findFirst({ where: filter });
     }
