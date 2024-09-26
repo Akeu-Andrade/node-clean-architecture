@@ -1,0 +1,38 @@
+services:
+  mongodb:
+    image: mongo:4.0
+    restart: always
+#    platform: linux/amd64
+    container_name: compras-mongodb
+    environment:
+      TZ: 'America/Maceio'
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: compras
+    volumes:
+      - ./mongodb_data:/data/db
+    ports:
+      - "${MONGO_EXTERNAL_PORT}:27017"
+
+  node:
+    image: 20.13.1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: compras-node
+#    platform: linux/amd64
+    restart: always
+    working_dir: /home/node/app
+    environment:
+      TZ: 'America/Maceio'
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - "3000"
+    ports:
+      - "${NODE_EXTERNAL_PORT}:3000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
